@@ -8,6 +8,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
+    #bg-video{
+
+   position:fixed;
+   right:0;
+   bottom:0;
+   min-width:100%;
+   min-height:100%;
+   object-fit:cover;
+   z-index:-1;
+
+}
 *{
     margin:0;
     padding:0;
@@ -292,6 +303,11 @@ nav{
 </head>
 
 <body>
+    <video autoplay muted loop playsinline id="bg-video">
+
+   <source src="anime.mp4.mp4" type="video/mp4">
+
+</video>
 
 <div class="grid"></div>
 
