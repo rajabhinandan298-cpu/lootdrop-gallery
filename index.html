@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>lootdrop.exe</title>
@@ -271,6 +271,23 @@ nav{
 }
 
 }
+@media(max-width:768px){
+
+   nav{
+      flex-direction:column;
+      gap:10px;
+   }
+
+   .search-box{
+      width:90%;
+   }
+
+   .menu{
+      flex-wrap:wrap;
+      justify-content:center;
+   }
+
+}
 </style>
 </head>
 
@@ -285,7 +302,7 @@ nav{
        <a href="gallery.html">HOME</a>
         <a href="#">DROPS</a>
         <a href="#">SEARCH</a>
-        <a href="#">CONTACT</a>
+       <a href="#contact">CONTACT</a>
     </div>
 </nav>
 
@@ -352,5 +369,18 @@ buttons.forEach(btn => {
 });
 
 </script>
+<section id="contact">
+
+   <h1>Contact Me</h1>
+
+   <p>Email: rajabhinandan298@gmail.com</p>
+
+   <a href="https://t.me/YOUR_TELEGRAM_LINK" target="_blank">
+
+      Join Telegram
+
+   </a>
+
+</section>
 </body>
 </html>
