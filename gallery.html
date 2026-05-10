@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Gallery</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#050816;
+    color:white;
+    padding:30px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:40px;
+    font-size:40px;
+}
+
+.upload-section{
+    max-width:900px;
+    margin:auto;
+}
+
+.card{
+    background:#111827;
+    padding:20px;
+    border-radius:20px;
+    margin-bottom:30px;
+    border:1px solid cyan;
+    box-shadow:0 0 20px rgba(0,255,255,0.2);
+}
+
+.card img{
+    width:100%;
+    height:500px;
+    object-fit: contain;
+    border-radius:15px;
+    margin-top:20px;
+    display:none;
+}
+
+input[type="file"]{
+    margin-top:10px;
+}
+
+textarea{
+    width:100%;
+    height:80px;
+    margin-top:20px;
+    border:none;
+    outline:none;
+    border-radius:10px;
+    padding:15px;
+    font-size:16px;
+    background:#1f2937;
+    color:white;
+}
+.delete-btn{
+
+    margin-top:10px;
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:red;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+
+}
+</style>
+
+</head>
+<body>
+
+<h1>Some Photo with PROMT 😎</h1>
+<div class="upload-section" id="gallery"></div>
+
+<script>
+
+const gallery = document.getElementById("gallery");
+
+for(let i=1; i<=6; i++){
+
+    const card = document.createElement("div");
+
+    card.className = "card";
+
+    card.innerHTML = `
+
+    <h2>Photo ${i}</h2>
+
+    <input type="file" accept="image/*" hidden>
+
+    <button class="admin-btn">Upload Photo</button>
+    <button class="delete-btn">Delete</button>
+
+    <img>
+
+    <textarea placeholder="Photo ke niche text likho..."></textarea>
+
+    `;
+
+    gallery.appendChild(card);
+
+}
+
+const inputs = document.querySelectorAll('input[type="file"]');
+
+const buttons = document.querySelectorAll('.admin-btn');
+
+const images = document.querySelectorAll('.card img');
+const deleteButtons = document.querySelectorAll('.delete-btn');
+const textareas = document.querySelectorAll('textarea');
+const password = "1234";
+
+buttons.forEach((button,index)=>{
+
+    button.addEventListener("click", ()=>{
+
+        const pass = prompt("Enter Admin Password");
+
+        if(pass === password){
+
+            inputs[index].click();
+
+        }else{
+
+            alert("Wrong Password ❌");
+
+        }
+
+    });
+
+});
+
+inputs.forEach((input,index)=>{
+
+    input.addEventListener("change", function(){
+
+        const file = this.files[0];
+
+        if(file){
+
+            const reader = new FileReader();
+
+            reader.onload = function(e){
+
+                images[index].src = e.target.result;
+
+                images[index].style.display = "block";
+                localStorage.setItem("image"+index, e.target.result);
+
+            }
+
+            reader.readAsDataURL(file);
+
+        }
+
+    });
+
+});
+images.forEach((img,index)=>{
+
+
+    const savedImage = localStorage.getItem("image"+index);
+
+    if(savedImage){
+
+        img.src = savedImage;
+
+        img.style.display = "block";
+
+    }
+
+});
+textareas.forEach((textarea,index)=>{
+
+    textarea.addEventListener("input", ()=>{
+
+        localStorage.setItem("text"+index, textarea.value);
+
+    });
+
+    const savedText = localStorage.getItem("text"+index);
+
+    if(savedText){
+
+        textarea.value = savedText;
+
+    }
+
+});
+deleteButtons.forEach((button,index)=>{
+
+    button.addEventListener("click", ()=>{
+
+        images[index].src = "";
+
+        images[index].style.display = "none";
+
+        textareas[index].value = "";
+
+        localStorage.removeItem("image"+index);
+
+        localStorage.removeItem("text"+index);
+
+    });
+
+});
+</script>
+
+</body>
+</html>
